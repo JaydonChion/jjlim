@@ -1,8 +1,10 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Instascan &ndash; Demo</title>
-    <link rel="icon" type="image/png" href="" />
-    <link rel="stylesheet" href="style.css" />
+    <title>Eterna</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/main.css" />
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"
@@ -17,46 +19,53 @@
     ></script>
   </head>
   <body>
-    <div id="app">
-      <div class="sidebar">
-        <section class="cameras">
-          <h2>Cameras</h2>
-          <ul>
-            <li v-if="cameras.length === 0" class="empty">No cameras found</li>
-            <li v-for="camera in cameras">
-              <span
-                v-if="camera.id == activeCameraId"
-                :title="formatName(camera.name)"
-                class="active"
-                >{{ formatName(camera.name) }}</span
-              >
-              <span
-                v-if="camera.id != activeCameraId"
-                :title="formatName(camera.name)"
-              >
-                <a @click.stop="selectCamera(camera)"
-                  >{{ formatName(camera.name) }}</a
-                >
-              </span>
-            </li>
-          </ul>
-        </section>
-        <section class="scans">
-          <h2>Scans</h2>
-          <ul v-if="scans.length === 0">
-            <li class="empty">No scans yet</li>
-          </ul>
+    <section id="banner">
+      <div class="inner">
+        <header>
+          <h1>Welcome to ETERNA</h1>
+        </header>
+
+        
+
+        <div class="scans">
+          <h2>Scan Your QR Code Here</h2>
           <transition-group name="scans" tag="ul">
-            <li v-for="scan in scans" :key="scan.date" :title="scan.content">
-              {{ scan.content }}
-            </li>
+            <li id="scan" v-for="scan in scans" :key="scan.date" :title="scan.content"></li>
           </transition-group>
-        </section>
-      </div>
-      <div class="preview-container">
-        <video id="preview"></video>
-      </div>
-    </div>
+        </div>
+
+        <div class="preview-container">
+          <video id="preview"></video>
+        </div>
+
+        <div class="flex ">
+          <div>
+            <span class="icon fa-facebook-square"></span>
+            <h3>Facebook</h3>
+            <p>Follow Facebook for more updates</p>
+          </div>
+
+          <div>
+            <span class="icon fa-instagram"></span>
+            <h3>Instagram</h3>
+            <p>Follow Instagram for more updates</p>
+          </div>
+
+          <div>
+            <span class="icon fa-mobile"></span>
+            <h3>App</h3>
+            <p>Available on IOS and Android</p>
+          </div>
+        </div>
+        
+        <footer>
+          <a href="#" class="button"
+            >Sign up for membership to get more rewards</a
+          >
+        </footer>
+    </section>
+
+    <!-- Scripts -->
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>

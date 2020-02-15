@@ -11,7 +11,25 @@ var app = new Vue({
     self.scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5 });
     self.scanner.addListener('scan', function (content, image) {
       self.scans.unshift({ date: +(Date.now()), content: content });
-      alert(content);
+      var xhttp = new XMLHttpRequest();
+      var resultText = "";
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {    
+            resultText = xhttp.responseText;
+
+            if(resultText == "fail"){
+              alert("Something wrong! Please call us for help")
+
+            }else{
+              alert("Item dispensing!")
+            }
+            
+                          }
+        };
+        var url = "http://127.0.0.1/item/"+content;
+        xhttp.open("GET",url, true);
+        xhttp.send();
+        
     });
     Instascan.Camera.getCameras().then(function (cameras) {
       self.cameras = cameras;
@@ -35,3 +53,7 @@ var app = new Vue({
     }
   }
 });
+
+
+
+

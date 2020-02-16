@@ -1,0 +1,256 @@
+{{define "signuplayout"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script
+      src="/js/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+    <link
+      href="/css/bootstrap/bootstrap-datetimepicker.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="stylesheet" href="../public/css/bootstrap/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="../public/js/bootstrap/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+    <title>Sign Up</title>
+
+    <style>
+      .pageTitle {
+        display: block;
+        color: white;
+        opacity: 0.5;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 3vh;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background-color: #333">
+      <center>
+        <label class="pageTitle">Sign Up New Account</label>
+      </center>
+    </header>
+
+    <form
+      style="padding-left:5vw;padding-right:5vw; padding-top: 5vh;"
+      action="/signup_account"
+      method="POST"
+    >
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input
+            class="form-control"
+            id="email"
+            name="email"
+            type="email"
+            required
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="phone">Phone</label>
+          <input
+            class="form-control"
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Mnum">NRIC / Fin Number</label>
+          <input
+            class="form-control"
+            id="Mnum"
+            name="Mnum"
+            type="text"
+            required
+          />
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="gender">Gender</label>
+          <select class="form-control" name="gender" id="gender" required>
+            <option selected>Male</option>
+            <option>Female</option>
+            <option>LGBT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="password">Password</label>
+          <input
+            name="password"
+            class="form-control"
+            onkeyup="check()"
+            id="signUpPasswordInput"
+            type="Password"
+            required
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            name="confirmPassword"
+            class="form-control"
+            onkeyup="check()"
+            id="signUpConfirmPasswordInput"
+            type="Password"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div
+          class="date form-group col-md-12 input-group "
+          id="dobdatetimepicker"
+          onmousedown="pickDate()"
+        >
+          <label for="dobDate" style="margin-right: 1vw;">Date of Birth </label>
+          <input
+            name="dobDate"
+            type="text"
+            placeholder="YYYY-MM-DD"
+            class="form-control"
+            id="dobDate"
+            required
+          />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="privCheck" class="form-check">
+          <input
+            onchange="toggleBut()"
+            class="form-check-input"
+            type="checkbox"
+            id="acknowledgeCheck"
+          />
+          <label for="gridCheck">
+            I have read the
+            <a href="/privacyPolicy" target="_blank">Privacy Policy</a>
+          </label>
+        </div>
+      </div>
+
+      <center>
+        <button
+          style="margin-top:7vh;"
+          id="signUpButton"
+          type="submit"
+          class="btn btn-primary"
+          disabled
+        >
+          Create Account
+        </button>
+      </center>
+    </form>
+    <center>
+      <p style="margin-top: 3vh;" id="message"></p>
+      <p style="width:170px;" class="link" onclick="location.href = '/';">
+        Already have account?
+      </p>
+    </center>
+
+    <script>
+      $('.menu').on('click', function() {
+        $('.menu').removeClass('active');
+        $(this).addClass('active');
+      });
+
+      var matchPass = false;
+
+      var check = function() {
+        if (document.getElementById('signUpPasswordInput').value == '') {
+          document.getElementById('message').style.color = 'white';
+          document.getElementById('message').innerHTML =
+            'Password not matching';
+          matchPass = false;
+        } else if (
+          document.getElementById('signUpPasswordInput').value ==
+          document.getElementById('signUpConfirmPasswordInput').value
+        ) {
+          document.getElementById('message').style.color = 'green';
+          document.getElementById('message').innerHTML = 'Password match';
+          matchPass = true;
+        } else {
+          document.getElementById('message').style.color = 'red';
+          document.getElementById('message').innerHTML =
+            'Password not matching';
+          matchPass = false;
+        }
+        //document.getElementById("signUpButton").disabled = !matchPass;
+        toggleBut();
+      };
+
+      function toggleBut() {
+        if (document.getElementById('acknowledgeCheck').checked && matchPass) {
+          document.getElementById('signUpButton').disabled = false;
+        } else {
+          document.getElementById('signUpButton').disabled = true;
+        }
+      }
+
+      function pickDate() {
+        $('#dobdatetimepicker').datetimepicker({
+          format: 'yyyy-mm-dd'
+        });
+      }
+    </script>
+  </body>
+</html>
+
+{{end}}

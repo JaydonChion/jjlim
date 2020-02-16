@@ -1,0 +1,69 @@
+	/* .typeahead { border: 2px solid #FFF;border-radius: 4px;padding: 8px 12px;max-width: 300px;min-width: 290px;background: rgba(66, 52, 52, 0.5);color: #FFF;} */
+	.tt-menu { width:300px; }
+	ul.typeahead{margin:0px;padding:10px 0px;}
+	ul.typeahead.dropdown-menu li a {padding: 10px !important;	border-bottom:#CCC 1px solid;color:lightgray;}
+	ul.typeahead.dropdown-menu li:last-child a { border-bottom:0px !important; }
+	.demo-label {font-size:1.5em;color: #686868;font-weight: 500;color:#FFF;}
+	.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+		text-decoration: none;
+		background-color: #1f3f41;
+		outline: 0;
+  }
+
+
+  .tileRow {margin: 0 -5px;}
+
+  
+  /* from here */
+
+  p, span, a, ul, li, button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+strong {
+  font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5em;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 400;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 90%;
+  margin-bottom:1vh;
+  padding:1.5vh;
+  margin-bottom: 1vh;
+}
+
+.cardTitle{
+    font-size: 3vh;
+}
+
+
+
+
+  
+
+  @media (min-width: 481px) and (max-width: 767px) {
+  
+
+}
+
+
+  @media (min-width: 768px) {
+  
+
+  
+}

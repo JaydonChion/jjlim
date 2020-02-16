@@ -1,0 +1,392 @@
+{{define "display"}}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link
+rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+crossorigin="anonymous"
+/>
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"
+></script>
+
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"
+></script>
+
+<link
+href="/css/bootstrap/bootstrap-datetimepicker.min.css"
+rel="stylesheet"
+/>
+
+<style>
+.fab {
+   width: 70px;
+   height: 70px;
+   background-color: maroon;
+   border-radius: 50%;
+   box-shadow: 0 6px 10px 0 #666;
+   transition: all 0.1s ease-in-out;
+ 
+   font-size: 50px;
+   color: white;
+   text-align: center;
+   line-height: 70px;
+ 
+   position: fixed;
+   right: 50px;
+   bottom: 50px;
+}
+ 
+.fab:hover {
+   box-shadow: 0 6px 14px 0 #666;
+   transform: scale(1.05);
+}
+</style>
+
+
+<div style="width: 100%"  class="w3-container " id="projects">
+    <h3  class="w3-border-bottom w3-border-light-grey w3-padding-16">Food Left Prediction</h3>
+  
+  </div>
+
+{{if .predict}}
+
+<div style="left:5%;margin-top:7h;margin-bottom: 5vh; padding: 5vh;"  class="card">
+
+    <div class="container">
+      <h4><b>Let us predict for you</b></h4>
+      <p style="font-weight: 600">Please enter the following data: <span id="cupNum"></span></p>
+    </div>
+
+    <div>
+            <div class="form-group">
+                    <label for="tpeopleInput">Total People</label>
+                    <input
+                      type="number"
+                      id="tpeopleInput"
+                      class="form-control"
+                      name="tpeopleInput"
+                      required
+                    />
+                  </div>
+            
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="nmaleInput">No. Male</label>
+                      <input
+                        class="form-control"
+                        id="nmaleInput"
+                        name="nmaleInput"
+                        type="number"
+                        required
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="nfemaleInput">No. Female</label>
+                      <input
+                        class="form-control"
+                        id="nfemaleInput"
+                        name="nfemaleInput"
+                        type="number"
+                        required
+                      />
+                    </div>
+                  </div>
+            
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="ageInput">Average Age</label>
+                      <input
+                        class="form-control"
+                        id="ageInput"
+                        name="ageInput"
+                        type="number"
+                        required
+                      />
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="timeInput">Catering Time</label>
+                        <input
+                          class="form-control"
+                          id="timeInput"
+                          name="timeInput"
+                          type="number"
+                          placeholder="e.g 1400 for 2pm"
+                          required
+                        />
+                      </div>
+
+                  </div>
+
+                  <p style="text-align: center"><button onclick="predict()" class="btn btn-primary">Predict</button></p>
+
+        
+    </div>
+  </div>
+
+
+  <div style="width: 100%"  class="w3-container " id="projects">
+    <h3  class="w3-border-bottom w3-border-light-grey w3-padding-16">Past Contributed Data</h3>
+  
+  </div>
+
+<table class="table table-striped">
+        <thead>
+          <tr style="text-align: center;">
+            <th scope="col">Total People</th>
+            <th scope="col">No. Male</th>
+            <th scope="col" >No. Female</th>
+            <th scope="col" >Average Age</th>
+            <th scope="col" >Catering time</th>
+            <th scope="col" >Food left (pax)</th>
+          </tr>
+        </thead>
+        <tbody>
+{{range .predict}}
+<tr style="text-align: center;" class="rowclass">
+  <td>{{.Tpeople}}</td>
+  <td >{{.Nmale}}</td>
+  <td>{{.Nfemale}}</td>
+  <td >{{.Age}}</td>
+  <td >{{.Time}}</td>
+  <td >{{.Foodleft}}</td>
+
+</tr>
+{{end}}
+</tbody>
+</table>
+
+{{else}}
+<center>
+<img style="width: 35vh;margin-top: 10vh;" src="/assets/notfoundnoback.png">
+<h1 style="font-size: 3vh;">Insufficient data for prediction, please contribute</h1>
+
+</center>
+{{end}}
+
+
+
+<!-- modal start here -->
+<div class="modal fade" style="padding:10vh" id="ansContributionForm" tabindex="-1" role="dialog" aria-labelledby="ansContributionFormTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ansContributionFormTitle">Contribute Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="myform" autocomplete="off" action="/contribute" method="POST">
+
+            <div class="modal-body">
+      
+  
+                          <div class="form-group">
+                            <label for="tpeople">Total People</label>
+                            <input
+                              type="number"
+                              id="tpeople"
+                              class="form-control"
+                              name="tpeople"
+                              required
+                            />
+                          </div>
+                    
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="nmale">No. Male</label>
+                              <input
+                                class="form-control"
+                                id="nmale"
+                                name="nmale"
+                                type="number"
+                                required
+                              />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="nfemale">No. Female</label>
+                              <input
+                                class="form-control"
+                                id="nfemale"
+                                name="nfemale"
+                                type="number"
+                                required
+                              />
+                            </div>
+                          </div>
+                    
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="age">Average Age</label>
+                              <input
+                                class="form-control"
+                                id="age"
+                                name="age"
+                                type="number"
+                                required
+                              />
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="time">Catering Time</label>
+                                <input
+                                  class="form-control"
+                                  id="time"
+                                  name="time"
+                                  type="number"
+                                  placeholder="e.g 1400 for 2pm"
+                                  required
+                                />
+                              </div>
+                    
+
+                          </div>
+                    
+                    
+                          <div class="form-group">
+                                <label for="foodleft">Estimated Food Left (pax)</label>
+                                <input
+                                  type="text"
+                                  id="foodleft"
+                                  class="form-control"
+                                  name="foodleft"
+                                  placeholder="e.g 50 persons"
+                                  required
+                                />
+                              </div>
+                    
+
+                    
+  
+                   
+                  
+                  </div>
+  
+    
+      
+                  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Contribute</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+<!-- modal end here -->
+<div onclick="contribute()" class="fab"> + </div>
+<script src="https://unpkg.com/svd-js" type="application/javascript"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.0/math.js" type="application/javascript"></script> 
+
+
+<script>
+ function contribute(){
+
+$("#ansContributionForm").modal("show");
+}
+
+
+function predict(){
+   let a = [
+     [53, 40, 13, 25, 1400],
+     [100, 40, 60, 23, 1300],
+     [80, 50, 30, 45, 1200],
+     [20, 12, 8, 5, 1000],
+     [200, 90, 110, 28, 1230]
+   ]
+
+   let y = [
+       [7],
+       [20],
+       [6],
+       [3],
+       [25]
+   ]
+
+   ainv = math.inv(a)
+   
+   b = math.multiply(ainv,y)
+
+
+//     result = math.qr(a)
+
+//     rinv = math.inv(result.R)
+//     qT = math.transpose(result.Q)
+//     temp = math.dot(rinv,qT)
+//     console.log("rinv:")
+//     console.log(rinv)
+//     console.log("qT")
+//     console.log(qT)
+//     btemp = math.dot(rinv,qT)
+//     b = math.dot(btemp,y)
+//  console.log(b)
+//    let { u, v, q } = SVDJS.SVD(a)
+
+//    qT = math.transpose(q)
+
+
+   let inputData = [];
+   inputData.push(document.getElementById("tpeopleInput").value)
+   inputData.push(document.getElementById("nmaleInput").value)
+   inputData.push(document.getElementById("nfemaleInput").value)
+   inputData.push(document.getElementById("ageInput").value)
+   inputData.push(document.getElementById("timeInput").value)
+   
+   inputTranspose = math.transpose(inputData)
+
+   
+   var output = 0
+   output = math.round(math.multiply(inputData,b) /4)
+   alert("We estimated that you might have "+output+" (pax) left over food")
+   
+}
+
+
+function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+                }
+
+                function deleteCookie(name) {
+                document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                }
+
+
+                $(document).ready(function(){
+              var errorMsg = getCookie("error_message");
+              if (errorMsg != "") {
+              alert(errorMsg);
+              deleteCookie("error_message");
+
+              }
+
+
+        })
+
+</script>
+
+
+    
+{{end}}

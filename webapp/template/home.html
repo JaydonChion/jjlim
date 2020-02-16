@@ -1,0 +1,136 @@
+{{define "display"}}
+
+<div style="left:5%;margin-top:7h;margin-bottom: 5vh; padding: 5vh;"  class="card">
+
+  <div class="container">
+    <h4><b>{{.user.Name}}</b></h4>
+    <p style="font-weight: 600">Total cup saved: <span id="cupNum"></span></p>
+
+    
+    <div class="progress">
+      <div class="progress-bar" id="mybar" role="progressbar" aria-valuenow=""
+      aria-valuemin="0" aria-valuemax="100" >
+      </div>
+    </div>
+    <br>
+    <p style="font-weight: 600">Total stars collected: <span id="starNum" style="padding-right: 1vh;"></span><img style="width: 3vh;" src="/assets/star.png"></p>
+  </div>
+</div>
+
+
+<div style="left:5%;padding: 5vh; margin-bottom: 10vh;"  class="card">
+
+  <div class="container">
+    <h4><b>History</b></h4>
+
+
+    {{if .hists}}
+                                <table class="table table-striped">
+                                        <thead>
+                                          <tr style="text-align: center;">
+                                            <th scope="col">Date / Time</th>
+                                            <th scope="col" >Location</th>
+                       
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                {{range .hists}}
+                                <tr style="text-align: center;" class="rowclass">
+                                  <td>{{.CreatedAt | printf "%.19s"}}</td>
+                                  <td >{{.Location_id}}</td>                     
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                            {{else}}
+                            <center>
+                                <img style="width: 35vh;margin-top: 10vh;" src="/private/assets/welcome.png">
+                                <h1 style="font-size: 3vh;">You are new here! Welcome to use our service</h1>
+  
+                              </center>
+                            {{end}}
+
+
+  </div>
+</div>
+
+
+
+
+                  
+
+
+    <script>
+
+
+      function process(){
+
+        var id = document.getElementById("shopint").value
+        if(document.getElementById("saniNum").value.length == 0){
+          document.getElementById("saniNum").value = document.getElementById("oriSani"+id.toString()).innerHTML
+        }
+
+        if(document.getElementById("maskNum").value.length == 0){
+          document.getElementById("maskNum").value = document.getElementById("oriMask"+id.toString()).innerHTML
+        }
+
+        document.getElementById("myform").submit();  
+      }
+
+
+
+      $(document).ready(function(){
+
+        document.getElementById("mybar").style.width = "{{.cupSaved}}%";
+        var num = parseInt("{{.cupSaved}}", 10);
+        document.getElementById("cupNum").innerHTML = num/ 10;
+        document.getElementById("starNum").innerHTML = num;
+        })
+
+      
+
+
+
+
+      function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+                }
+
+                function deleteCookie(name) {
+                document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                }
+
+
+                $(document).ready(function(){
+
+              var errorMsg = getCookie("error_message");
+              if (errorMsg != "") {
+              alert(errorMsg);
+              deleteCookie("error_message");
+
+              }
+
+
+        })
+    </script>
+    
+    
+    
+    
+
+
+
+
+{{end}}

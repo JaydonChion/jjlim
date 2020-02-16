@@ -1,0 +1,247 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+
+
+li a {
+  display: block;
+  color: white;
+  opacity: 0.50;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 1.5vh;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.menu.active {
+    opacity: 1;
+  font-weight: 600;
+}
+
+.logoimage{
+    margin-top: 5vh;
+    width: 70vw;
+    
+
+}
+
+.loginBut{
+
+    margin-top:5vh;
+    width: 25vw;
+    height:6vh;
+}
+
+.loginForm{
+    margin-top:2vh;
+    padding-right: 5vw;
+    width: 90vw;
+}
+
+.signUpForgetText{
+    margin-top: 10vh;
+padding-right: 5vw;
+}
+
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+
+.link{
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link:hover{
+    font-weight: 600;
+
+}
+
+.privCheck{
+   position:relativel;
+   left:2vw;
+}
+
+
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+    li a {
+        display: block;
+        color: white;
+        opacity: 0.50;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 3vh
+      }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    li a {
+        display: block;
+        color: white;
+        opacity: 0.50;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 3vh;
+      }
+
+
+      .logoimage{
+        margin-top: 5vh;
+        width: 40vw;
+        
+    
+    }
+
+    .loginBut{
+
+        margin-top:5vh;
+        width: 20vw;
+        height:4vh;
+        font-size: 2vh;
+    }
+
+
+    .signUpForgetText{
+        margin-top: 10vh;
+    padding-right: 5vw;
+    font-size: 2vh;
+    }
+
+    .privCheck{
+        padding-left: 3vw;
+     }
+     
+    
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    li a {
+        display: block;
+        color: white;
+        opacity: 0.50;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 3vh;
+      }
+
+
+      .logoimage{
+        margin-top: 5vh;
+        width: 60vw;
+        
+    
+    }
+
+    .loginBut{
+
+        margin-top:5vh;
+        width: 20vw;
+        height:4vh;
+        font-size: 2vh;
+    }
+
+
+    .signUpForgetText{
+        margin-top: 10vh;
+    padding-right: 5vw;
+    font-size: 2vh;
+    }
+    
+
+    .loginInput{
+        font-size:2vh;
+    }
+
+    .privCheck{
+        padding-left: 2vw;
+     }
+
+}
+
+
+
+@media (min-width: 1200px) {
+
+    
+
+    li a {
+        display: block;
+        color: white;
+        opacity: 0.50;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 3vh;
+      }
+
+
+      .logoimage{
+        margin-top: 5vh;
+        width: 50vw;
+        padding-right: 5vw;
+
+        
+    
+    }
+
+    .loginForm{
+        margin-top:5vh;
+        padding-right: 5vw;
+        width: 50vw;
+    }
+
+    .loginBut{
+
+        margin-top:5vh;
+        width: 15vw;
+        height:4vh;
+        font-size: 2vh;
+    }
+
+
+    .signUpForgetText{
+        margin-top: 10vh;
+    padding-right: 5vw;
+    font-size: 2vh;
+    }
+    
+
+    .loginInput{
+        font-size:2vh;
+    }
+
+    .privCheck{
+        padding-left: 2vw;
+     }
+
+     
+
+}

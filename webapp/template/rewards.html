@@ -1,0 +1,140 @@
+{{define "display"}}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+@media (min-width: 1200px) {
+.rewardsAlign{
+         margin-left:20vh;
+     }
+    }
+</style>
+<div>
+
+    <div style="width: 100%"  class="w3-container " id="projects">
+            <h3 style="float: left" class="w3-border-bottom w3-border-light-grey w3-padding-16">Redeem rewards</h3>
+            <p style="font-weight: 600; font-size: 2.5vh; float: right; margin-top: 5vh;">Total stars collected: <span id="starNum" style="padding-right: 1vh;">{{.cupSaved}}</span><img style="width: 3vh;" src="/assets/star.png"></p>
+
+          </div>
+        
+          <div class="w3-row-padding rewardsAlign">
+            <div onclick="redeem(this.id)" id="100" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+              <div class="w3-display-container">
+                <div class="w3-display-topleft w3-black w3-padding">Grab</div>
+                <img src="/assets/grab.png" alt="Grab Voucher" style="width:100%; height:20vh;">
+              </div>
+            </div>
+            <div onclick="redeem(this.id)" id="150" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                <div class="w3-display-container">
+                <div class="w3-display-topleft w3-black w3-padding">Capital Mall</div>
+                <img src="/assets/mall.jpg" alt="House" style="width:100%;flex: 0.75;height:20vh;">
+              </div>
+            </div>
+            <div onclick="redeem(this.id)" id="125" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                <div class="w3-display-container">
+                <div class="w3-display-topleft w3-black w3-padding">Facial</div>
+                <img src="/assets/facial.jpg" alt="House" style="width:100%;flex: 1.3344;height:20vh;">
+              </div>
+            </div>
+
+
+
+            <div class="w3-row-padding">
+                <div onclick="redeem(this.id)" id="50" style=" padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                  <div class="w3-display-container">
+                    <div class="w3-display-topleft w3-black w3-padding">4Fingers</div>
+                    <img src="/assets/fingers.jpg" alt="Grab Voucher" style="width:100%; height:20vh;">
+                  </div>
+                </div>
+                <div onclick="redeem(this.id)" id="50" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                    <div class="w3-display-container">
+                    <div class="w3-display-topleft w3-black w3-padding">Liho</div>
+                    <img src="/assets/liho.jpg" alt="House" style="width:100%;flex: 0.75;height:20vh;">
+                  </div>
+                </div>
+                <div onclick="redeem(this.id)" id="50" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                    <div class="w3-display-container">
+                    <div class="w3-display-topleft w3-black w3-padding">PizzaHut</div>
+                    <img src="/assets/pizza.jpg" alt="House" style="width:100%;flex: 1.3344;height:20vh;">
+                  </div>
+                </div>
+
+
+                <div class="w3-row-padding">
+                    <div onclick="redeem(this.id)" id="140" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                      <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Treatment</div>
+                        <img src="/assets/hair.png" alt="Grab Voucher" style="width:100%; height:20vh;">
+                      </div>
+                    </div>
+                    <div onclick="redeem(this.id)" id="200" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                        <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Agoda</div>
+                        <img src="/assets/agoda.png" alt="House" style="width:100%;flex: 0.75;height:20vh;">
+                      </div>
+                    </div>
+                    <div onclick="redeem(this.id)" id="100" style="padding-right:5vh;padding-bottom:5vh;margin-right:2vh;" class="w3-col l3 m6 w3-margin-bottom card">
+                        <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Yoga</div>
+                        <img src="/assets/yoga.jpg" alt="House" style="width:100%;flex: 1.3344;height:20vh;">
+                      </div>
+                    </div>
+          
+
+
+</div>
+
+
+
+</div>
+
+
+    <!-- pop up modal for submitting answer -->
+    <div class="modal fade" style="padding:10vh" id="ansContributionForm" tabindex="-1" role="dialog" aria-labelledby="ansContributionFormTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ansContributionFormTitle">Redeem Rewards</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="myform" autocomplete="off" action="/update" method="POST">
+    
+                <div class="modal-body">
+          
+      
+                    <p>Are you sure you want to redeem this rewards with <span id="point"></span> points?</p>
+
+      
+                       
+                      
+                      </div>
+      
+        
+          
+                      
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" onclick="doneRedeem()" data-dismiss="modal" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+
+
+<script>
+
+        function doneRedeem(){
+            alert("You have successfully redeemed the reward")
+        }
+      function redeem(id){
+        document.getElementById("point").innerHTML = id;
+        $("#ansContributionForm").modal("show");
+      }
+
+
+</script>
+
+
+{{end}}

@@ -1,0 +1,257 @@
+{{define "display"}}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link
+rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+crossorigin="anonymous"
+/>
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"
+></script>
+
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"
+></script>
+
+<link
+href="/css/bootstrap/bootstrap-datetimepicker.min.css"
+rel="stylesheet"
+/>
+
+<style>
+.fab {
+   width: 70px;
+   height: 70px;
+   background-color: #444242;
+   border-radius: 50%;
+   box-shadow: 0 6px 10px 0 #666;
+   transition: all 0.1s ease-in-out;
+ 
+   font-size: 50px;
+   color: white;
+   text-align: center;
+   line-height: 70px;
+ 
+   position: fixed;
+   right: 50px;
+   bottom: 50px;
+}
+ 
+.fab:hover {
+   box-shadow: 0 6px 14px 0 #666;
+   transform: scale(1.05);
+}
+</style>
+
+
+<div style="width: 100%"  class="w3-container " id="projects">
+  <h3  class="w3-border-bottom w3-border-light-grey w3-padding-16">Food Donation</h3>
+
+</div>
+
+
+{{if .donate}}
+<table class="table table-striped">
+        <thead>
+          <tr style="text-align: center;">
+            <th scope="col">Location</th>
+            <th scope="col">Food Type</th>
+            <th scope="col" >Amount (Per Pax)</th>
+            <th scope="col" >Description</th>
+            <th scope="col" >Time Added</th>
+            <th scope="col" ></th>
+          </tr>
+        </thead>
+        <tbody>
+{{range .donate}}
+<tr style="text-align: center;" class="rowclass">
+  <td>{{.Location}}</td>
+  <td >{{.FoodType}}</td>
+  <td>{{.Amount}}</td>
+  <td >{{.Descrp }}</td>
+  <td >{{.CreatedAt| printf "%.19s"}}</td>
+  <td ><button onclick="alert('Informed the donor, please collect at the location stated')" type="button" class="btn btn-primary">Collect</button></td>
+
+</tr>
+{{end}}
+</tbody>
+</table>
+
+{{else}}
+<center>
+<img style="width: 35vh;margin-top: 10vh;" src="/assets/notfoundnoback.png">
+<h1 style="font-size: 3vh;">Currently there isn't any donated food</h1>
+
+</center>
+{{end}}
+
+
+
+
+
+<div class="modal fade" style="padding:10vh" id="ansContributionForm" tabindex="-1" role="dialog" aria-labelledby="ansContributionFormTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ansContributionFormTitle">Donate Excess Food</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="myform" autocomplete="off" action="/donate" method="POST">
+    
+                <div class="modal-body">
+          
+      
+                              <div class="form-group">
+                                <label for="name">Location</label>
+                                <input
+                                  type="text"
+                                  id="location"
+                                  class="form-control"
+                                  name="location"
+                                  required
+                                />
+                              </div>
+                        
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="email">Donor's Name</label>
+                                  <input
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                  />
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="phone">Phone</label>
+                                  <input
+                                    class="form-control"
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                        
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="Mnum">NRIC / Fin Number</label>
+                                  <input
+                                    class="form-control"
+                                    id="Mnum"
+                                    name="Mnum"
+                                    type="text"
+                                    required
+                                  />
+                                </div>
+                        
+                                <div class="form-group col-md-6">
+                                  <label for="halal">Halal / Non Halal</label>
+                                  <select class="form-control" name="halal" id="halal" required>
+                                        <option selected>Non-Halal</option>
+                                    <option >Halal</option>
+                                    
+                                  </select>
+                                </div>
+                              </div>
+                        
+                        
+                              <div class="form-group">
+                                    <label for="name">Estimated Amount Left</label>
+                                    <input
+                                      type="text"
+                                      id="amount"
+                                      class="form-control"
+                                      name="amount"
+                                      placeholder="e.g 50 persons"
+                                      required
+                                    />
+                                  </div>
+                        
+                                  <div class="form-group">
+                                        <label for="name">Food Description</label>
+                                        <input
+                                          type="text"
+                                          id="descrp"
+                                          class="form-control"
+                                          name="descrp"
+                                          placeholder="Please describe the food, the conditions etc"
+                                      
+                                        />
+                                      </div>
+                        
+      
+                       
+                      
+                      </div>
+      
+        
+          
+                      
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Donate</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div onclick="donate()" class="fab"> + </div>
+
+
+<script>
+
+    function donate(){
+
+        $("#ansContributionForm").modal("show");
+    }
+
+    function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+                }
+
+                function deleteCookie(name) {
+                document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                }
+
+
+                $(document).ready(function(){
+
+              var errorMsg = getCookie("error_message");
+              if (errorMsg != "") {
+              alert(errorMsg);
+              deleteCookie("error_message");
+
+              }
+
+
+        })
+</script>
+    
+{{end}}

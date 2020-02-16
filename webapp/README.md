@@ -1,2 +1,2 @@
-# lootgather
+
 # jjlim-web-platform
